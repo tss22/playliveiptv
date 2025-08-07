@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Play Live HD IPTV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Roboto', sans-serif; background-color: #111; color: #fff; scroll-behavior: smooth; }
+    header { background: #fff; display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; position: sticky; top: 0; z-index: 1000; }
+    nav a { margin: 0 10px; text-decoration: none; color: #000; font-weight: bold; padding: 8px 16px; background-color: #f2f2f2; border-radius: 20px; transition: all 0.3s ease; }
+    nav a:hover { background-color: #ff0050; color: #fff; }
+
+    .hero { padding: 100px 20px 60px; text-align: center; background-color: #111; }
+    .hero h1 { font-size: 44px; color: #ff0050; }
+    .hero h2 { font-size: 28px; color: #fff; margin-top: 10px; }
+    .buttons a { display: inline-block; margin: 15px 10px; padding: 12px 25px; background-color: #ff0050; color: white; text-decoration: none; font-weight: bold; border-radius: 6px; transition: background 0.3s; }
+    .buttons a:hover { background-color: #e60045; }
+
+    section { padding: 80px 20px; text-align: center; }
+    .info-section { background-color: #1c1c1c; padding: 60px 20px; text-align: center; }
+    .info-section h2 { font-size: 32px; margin-bottom: 20px; color: #ff0050; }
+    .info-section p { max-width: 800px; margin: 0 auto; font-size: 18px; color: #ddd; line-height: 1.6; }
+
+    /* Connections selector */
+    .connections-container { display: flex; justify-content: center; gap: 1rem; margin: 0 auto; flex-wrap: wrap; }
+    .connection-btn { background-color: #ff1d3f; color: #111; font-weight: 600; border: none; padding: 10px 18px; border-radius: 999px; cursor: pointer; transition: background 0.25s, transform 0.2s; }
+    .connection-btn:hover { transform: translateY(-2px); }
+    .connection-btn.active { background-color: #1a0a15; color: #fff; box-shadow: 0 0 0 2px #ff1d3f inset; }
+
+    /* Pricing */
+    #pricing { background-color: #1a1a1a; }
+    .pricing-intro { width: 100%; text-align: center; margin-bottom: 18px; }
+    .button-link { padding: 10px 25px; background-color: #ff0050; color: #fff; font-weight: bold; border-radius: 25px; text-decoration: none; transition: background-color 0.3s ease; display: inline-block; }
+    .button-link:hover { background-color: #e60045; }
+    .subline { color: #ddd; margin: 10px auto 24px; max-width: 800px; font-size: 16px; }
+
+    .pricing-cards { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .pricing-card { background: #fff; color: #000; padding: 30px; border-radius: 15px; width: 280px; text-align: left; box-shadow: 0 4px 12px rgba(0,0,0,0.2); position: relative; }
+    .pricing-card h3 { margin-bottom: 10px; }
+    .pricing-card h1 { font-size: 36px; color: #ff0050; display: flex; align-items: baseline; gap: 4px; }
+    .pricing-card h1 small { font-size: 14px; color: #333; font-weight: 400; }
+    .pricing-card ul { list-style: none; margin: 20px 0; padding: 0; }
+    .pricing-card ul li { margin: 10px 0; position: relative; padding-left: 20px; }
+    .pricing-card ul li::before { content: '»'; position: absolute; left: 0; color: #ff0050; }
+    .pricing-card a { display: block; text-align: center; margin-top: 15px; padding: 12px; border: 2px solid #000; text-decoration: none; font-weight: bold; color: #000; border-radius: 5px; }
+    .pricing-card a:hover { background: #ff0050; color: #fff; border-color: #ff0050; }
+    .pricing-card.highlight { box-shadow: 0 0 20px 5px #ff0050; transform: scale(1.05); transition: transform 0.3s, box-shadow 0.3s; }
+
+    /* Features table */
+    .features-table { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 60px 20px; background-color: #111; text-align: center; }
+    .features-table div { color: white; font-size: 18px; min-width: 200px; display: flex; flex-direction: column; align-items: center; gap: 10px; background-color: #2a2a2a; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.3); transition: transform 0.3s; }
+    .features-table div:hover { transform: translateY(-5px); }
+
+    /* Contact */
+    #contact { background-color: #111; }
+    .contact-methods { margin-top: 20px; font-size: 18px; line-height: 1.8; }
+    .contact-methods a { color: #ff0050; text-decoration: none; }
+    .contact-methods a:hover { text-decoration: underline; }
+
+    .free-trial { display: inline-block; padding: 10px 20px; font-weight: bold; color: #ff0050; background: transparent; animation: pulseText 2s infinite; }
+    @keyframes pulseText { 0% { opacity: 0.4; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.4; transform: scale(1); } }
+
+    .contact-section.highlight, .contact-methods.highlight { box-shadow: 0 0 20px 5px #ff0050; padding: 20px; border-radius: 10px; transition: box-shadow 0.4s ease-in-out; }
+
+    .logo-wave span { display: inline-block; font-size: 30px; font-weight: 900; font-family: 'Poppins', sans-serif; background: linear-gradient(to right, #ff0050, #ff9900); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    .stats-section { border: 2px solid #e91e63; padding: 20px; max-width: 1200px; margin: 0 auto; border-radius: 10px; }
+
+    /* Responsive */
+    @media (max-width: 720px) { .pricing-card { width: 92%; max-width: 340px; } }
+  
+    /* Floating WhatsApp button (restored) */
+    .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background-color: #25D366; color: #111; font-weight: 700; padding: 12px 18px; border-radius: 999px; text-decoration: none; box-shadow: 0 6px 18px rgba(0,0,0,0.35); transition: transform 0.2s ease, background 0.2s ease; z-index: 2000; }
+    .whatsapp-btn:hover { background-color: #1ebd5b; transform: translateY(-2px); }
+
+    /* General mobile polish */
+    html, body { overflow-x: hidden; }
+    section { scroll-margin-top: 90px; }
+
+    /* Small screens */
+    @media (max-width: 720px) {
+      header { padding: 12px 16px; }
+      .hero { padding: 80px 16px 40px; }
+      .connections-container { gap: 8px; }
+      .connection-btn { padding: 10px 14px; font-size: 14px; }
+      .pricing-cards { flex-direction: column; align-items: center; gap: 16px; }
+      .pricing-card { width: 92%; max-width: 420px; }
+      .whatsapp-btn { bottom: 14px; right: 14px; padding: 10px 14px; font-size: 14px; }
+    }
+
+    /* Very small devices */
+    @media (max-width: 380px) {
+      .connection-btn { padding: 9px 10px; font-size: 13px; }
+      .button-link { padding: 9px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-wave" aria-label="Play Live HD IPTV">
+      <span>P</span><span>l</span><span>a</span><span>y</span>
+      <span>&nbsp;</span>
+      <span>L</span><span>i</span><span>v</span><span>e</span>
+      <span>&nbsp;</span>
+      <span>H</span><span>D</span>
+      <span>&nbsp;</span>
+      <span>I</span><span>P</span><span>T</span><span>V</span>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#pricing" onclick="highlightPlans()">Pricing</a>
+      <a href="#contact" onclick="highlightContactSection()">Contact Us</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <h1>Play Live HD IPTV</h1>
+    <h2>Best International IPTV Service Provider</h2>
+    <div class="free-trial">🎉 36-Hour Free Trial for New Users!</div>
+    <div class="buttons">
+      <a href="#contact" onclick="highlightContact()" class="button-link">Get Free Trial</a>
+    </div>
+  </section>
+
+  <section class="info-section">
+    <h2>Why Choose Our IPTV?</h2>
+    <p>Experience seamless IPTV with 18,000+ live channels and VOD from around the world. Our service offers HD streaming, zero buffering, and full support on all devices. Enjoy flexible plans, fast setup, and 24/7 customer care. Whether you're into sports, movies, or global entertainment — we’ve got you covered.</p>
+  </section>
+
+  <section class="stats-section" style="background: #ff0050; color: white; text-align: center; padding: 40px 0;">
+    <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;">
+      <div><h2>+52000</h2><p>Active Clients</p></div>
+      <div><h2>+700</h2><p>Today's Customers</p></div>
+      <div><h2>+17</h2><p>Support Team Members</p></div>
+      <div><h2>+10</h2><p>Stable Servers</p></div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" aria-label="Pricing plans">
+    <div class="pricing-intro">
+      <a href="#pricing" onclick="highlightPlans()" class="button-link">Pricing Plan</a>
+      <p class="subline">Choose your preferred number of connections.</p>
+    </div>
+
+    <!-- Connections Selector (under Pricing Plan) -->
+    <div id="connections" aria-label="Choose number of connections" style="width:100%; max-width:1100px; margin:0 auto 26px;">
+      <div class="connections-container" role="tablist" aria-label="Connections options">
+        <button class="connection-btn active" role="tab" aria-selected="true" data-connections="1">1 Connection</button>
+        <button class="connection-btn" role="tab" aria-selected="false" data-connections="2">2 Connections</button>
+        <button class="connection-btn" role="tab" aria-selected="false" data-connections="3">3 Connections</button>
+        <button class="connection-btn" role="tab" aria-selected="false" data-connections="4">4 Connections</button>
+        <button class="connection-btn" role="tab" aria-selected="false" data-connections="5">5 Connections</button>
+      </div>
+    </div>
+
+    <!-- Cards wrapper so layout doesn't break -->
+    <div class="pricing-cards">
+      <div class="pricing-card" data-base-price="11">
+        <h3>Basic</h3>
+        <h1><span class="currency">$</span><span class="price-value">11</span> <small>/1 Month</small></h1>
+        <ul>
+          <li><span class="device-connections">1 Device Connection</span></li>
+          <li>18000+ TV Channels</li>
+          <li>Watch on any device</li>
+          <li>Free & auto updates</li>
+          <li>Satisfied or refunded</li>
+          <li>24/7 Instant Support</li>
+        </ul>
+        <a href="#contact">Order Now</a>
+      </div>
+
+      <div class="pricing-card" data-base-price="56">
+        <h3>Silver</h3>
+        <h1><span class="currency">$</span><span class="price-value">56</span> <small>/6 Months</small></h1>
+        <ul>
+          <li><span class="device-connections">1 Device Connection</span></li>
+          <li>18000+ TV Channels</li>
+          <li>Watch on any device</li>
+          <li>Free & auto updates</li>
+          <li>Satisfied or refunded</li>
+          <li>24/7 Instant Support</li>
+        </ul>
+        <a href="#contact">Order Now</a>
+      </div>
+
+      <div class="pricing-card" data-base-price="100">
+        <h3>Gold</h3>
+        <h1><span class="currency">$</span><span class="price-value">100</span> <small>/1 Year</small></h1>
+        <ul>
+          <li><span class="device-connections">1 Device Connection</span></li>
+          <li>18000+ TV Channels</li>
+          <li>Watch on any device</li>
+          <li>Free & auto updates</li>
+          <li>Satisfied or refunded</li>
+          <li>24/7 Instant Support</li>
+        </ul>
+        <a href="#contact">Order Now</a>
+      </div>
+
+      <div class="pricing-card" data-base-price="180">
+        <h3>Platinum</h3>
+        <h1><span class="currency">$</span><span class="price-value">180</span> <small>/2 Years</small></h1>
+        <ul>
+          <li><span class="device-connections">1 Device Connection</span></li>
+          <li>18000+ TV Channels</li>
+          <li>Watch on any device</li>
+          <li>Free & auto updates</li>
+          <li>Satisfied or refunded</li>
+          <li>24/7 Instant Support</li>
+        </ul>
+        <a href="#contact">Order Now</a>
+      </div>
+
+      <div class="pricing-card" data-base-price="250">
+        <h3>Lifetime</h3>
+        <h1><span class="currency">$</span><span class="price-value">250</span> <small>/Lifetime</small></h1>
+        <ul>
+          <li><span class="device-connections">1 Device Connection</span></li>
+          <li>18000+ TV Channels</li>
+          <li>Watch on any device</li>
+          <li>Free & auto updates</li>
+          <li>Satisfied or refunded</li>
+          <li>24/7 Instant Support</li>
+        </ul>
+        <a href="#contact">Order Now</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="features-table">
+    <div><h4>🔒</h4>Protects your device</div>
+    <div><h4>📞</h4>Customer Support</div>
+    <div><h4>📺</h4>Premium Channels</div>
+    <div><h4>⚙️</h4>Auto Updates</div>
+    <div><h4>✅</h4>100% Uptime</div>
+  </div>
+
+  <section class="contact-section" id="contact">
+    <h2>Contact Us</h2><br>
+    <p>You can reach our customer support through the following channels:</p>
+    <div class="contact-methods">
+      <p>📧 <strong>Email:</strong> <a href="mailto:support@example.com">support@example.com</a></p>
+      <p>📱 <strong>WhatsApp:</strong> <a href="https://wa.me/923001234567" target="_blank">Chat on WhatsApp</a></p>
+      <p>💬 <strong>Telegram:</strong> @IPTVSupport</p>
+    </div>
+  </section>
+
+  <footer>&copy; 2025 Play Live HD IPTV - All rights reserved.</footer>
+
+  <a class="whatsapp-btn" href="https://wa.me/923001112233" target="_blank">Chat on WhatsApp</a>
+
+  <script>
+    // Highlight pricing cards
+    function highlightPlans() {
+      const cards = document.querySelectorAll('.pricing-card');
+      cards.forEach(card => card.classList.add('highlight'));
+      setTimeout(() => { cards.forEach(card => card.classList.remove('highlight')); }, 2000);
+    }
+
+    function highlightContact() {
+      const contactInfo = document.querySelector('.contact-methods');
+      contactInfo.classList.add('highlight');
+      contactInfo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => { contactInfo.classList.remove('highlight'); }, 2000);
+    }
+    function highlightContactSection() {
+      const section = document.querySelector('.contact-section');
+      section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      section.classList.add('highlight');
+      setTimeout(() => { section.classList.remove('highlight'); }, 2000);
+    }
+
+    // Connections logic
+    let currentConnections = 1; // default
+    const formatPrice = (n) => Math.round(n).toString();
+
+    function applyConnections(n) {
+      currentConnections = n;
+      document.querySelectorAll('.connection-btn').forEach(btn => {
+        const isActive = Number(btn.dataset.connections) === n;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+      document.querySelectorAll('.pricing-card').forEach(card => {
+        const base = Number(card.dataset.basePrice || 0);
+        const newPrice = base * n; // simple multiplier; base scheme unchanged
+        const priceEl = card.querySelector('.price-value');
+        const connEl = card.querySelector('.device-connections');
+        if (priceEl) priceEl.textContent = formatPrice(newPrice);
+        if (connEl) connEl.textContent = `${n} Device Connection${n > 1 ? 's' : ''}`;
+      });
+    }
+
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.connection-btn');
+      if (!btn) return;
+      applyConnections(Number(btn.dataset.connections));
+    });
+
+    document.addEventListener('DOMContentLoaded', () => { applyConnections(currentConnections); });
+  </script>
+</body>
+</html>
